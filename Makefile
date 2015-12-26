@@ -15,11 +15,11 @@ DESTDIR = /usr/local
 # set the compiler to use
 CC = gcc
 
-SVNDEV := -D'SVN_REV="$(shell svnversion -c .)"'
+SVNDEV := -D'SVN_REV="git-$(shell git rev-parse HEAD|cut -c1-7)"'
 CFLAGS += $(SVNDEV)
 
 # general compile flags, enable all warnings to make compile more verbose
-CFLAGS += -O2 -DLINUX -D_GNU_SOURCE -Wall 
+CFLAGS += -O3 -DLINUX -D_GNU_SOURCE -Wall 
 # CFLAGS += -g 
 #CFLAGS +=  -DDEBUG
 
@@ -33,13 +33,13 @@ APP_BINARY = mjpg_streamer
 
 # define the names and targets of the plugins
 PLUGINS = input_uvc.so
-PLUGINS += output_file.so
-PLUGINS += output_udp.so
+# PLUGINS += output_file.so
+# PLUGINS += output_udp.so
 PLUGINS += output_http.so
-PLUGINS += input_testpicture.so
-#PLUGINS += output_autofocus.so
-#PLUGINS += input_gspcav1.so
-PLUGINS += input_file.so
+# PLUGINS += input_testpicture.so
+PLUGINS += output_autofocus.so
+# PLUGINS += input_gspcav1.so
+# PLUGINS += input_file.so
 # PLUGINS += output_rtsp.so
 # PLUGINS += output_ptp2.so # commented out because it depends on libgphoto
 # PLUGINS += input_control.so # commented out because the output_http does it's job

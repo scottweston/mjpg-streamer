@@ -1,3 +1,9 @@
+# How to build
+
+```
+$ make USE_LIBV4L2=true clean all
+```
+
 # Differences
 
 Fixes to the SF version (https://svn.code.sf.net/p/mjpg-streamer/code/mjpg-streamer/) to deal

@@ -290,7 +290,7 @@ int main(int argc, char *argv[])
      * if not running in daemon mode
      */
 #ifdef SVN_REV
-    LOG("MJPG Streamer Version: svn rev: %s\n", SVN_REV);
+    LOG("MJPG Streamer Version: %s\n", SVN_REV);
 #else
     LOG("MJPG Streamer Version.: %s\n", SOURCE_VERSION);
 #endif

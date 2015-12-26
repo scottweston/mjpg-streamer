@@ -1,3 +1,36 @@
+# Differences
+
+From to SF version (https://svn.code.sf.net/p/mjpg-streamer/code/mjpg-streamer/) to fix RPi issue with the latest firmware
+
+```
+--- plugins/input_uvc/v4l2uvc.c (revision 182)
++++ plugins/input_uvc/v4l2uvc.c (working copy)
+@@ -418,6 +418,7 @@
+ {
+ #define HEADERFRAME1 0xaf
+     int ret;
++    int32_t bytesused;
+
+     if(vd->streamingState == STREAMING_OFF) {
+         if(video_enable(vd))
+@@ -432,6 +433,7 @@
+         perror("Unable to dequeue buffer");
+         goto err;
+     }
++    bytesused = vd->buf.bytesused;
+
+     switch(vd->formatIn) {
+     case V4L2_PIX_FMT_MJPEG:
+@@ -468,6 +470,7 @@
+     }
+
+     ret = xioctl(vd->fd, VIDIOC_QBUF, &vd->buf);
++    vd->buf.bytesused = bytesused;
+     if(ret < 0) {
+         perror("Unable to requeue buffer");
+         goto err;
+```
+
 "MJPG-streamer", is a command line application that copied JPG-frame from a single input plugin to multiple output plugins. It can be used to stream JPEG files over an IP-based network from the webcam to a viewer like Firefox, Cambozola, Videolanclient or even to a Windows Mobile device running the TCPMP-Player.
 
 It was written for embedded devices with very limited ressources in terms of RAM and CPU. Its origin, the "uvc_streamer" was written, because Linux-UVC compatible cameras directly produce JPEG-data, allowing fast and perfomant M-JPEG streams even from an embedded device running OpenWRT. The input module "input_uvc.so" captures such JPG frames from a connected webcam.

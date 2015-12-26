@@ -1,6 +1,7 @@
 # Differences
 
-From to SF version (https://svn.code.sf.net/p/mjpg-streamer/code/mjpg-streamer/) to fix RPi issue with the latest firmware
+Fixes to the SF version (https://svn.code.sf.net/p/mjpg-streamer/code/mjpg-streamer/) to deal
+with RPI issue on the latest firmware
 
 ```
 --- plugins/input_uvc/v4l2uvc.c (revision 182)
@@ -30,6 +31,8 @@ From to SF version (https://svn.code.sf.net/p/mjpg-streamer/code/mjpg-streamer/)
          perror("Unable to requeue buffer");
          goto err;
 ```
+
+# README
 
 "MJPG-streamer", is a command line application that copied JPG-frame from a single input plugin to multiple output plugins. It can be used to stream JPEG files over an IP-based network from the webcam to a viewer like Firefox, Cambozola, Videolanclient or even to a Windows Mobile device running the TCPMP-Player.
 
